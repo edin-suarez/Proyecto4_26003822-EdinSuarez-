@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JSFiddle gpxhqyjt</title>
+
+  <style>
+    
+  </style>
+
+  
+</head>
+<body>
+  
+
+  <script>
+    const precioBase = 2000;
+
+while (true) {
+
+    let opcion = prompt(
+        "Bienvenido al cotizador TK-U\n" +
+        "Escriba 'Cotizar' para una nueva cotización\n" +
+        "Escriba 'Salir' para finalizar"
+    ).toLowerCase();
+
+    if (opcion === "salir") {
+        alert("Gracias por utilizar el cotizador TK-U");
+        break;
+    }
+
+    if (opcion !== "cotizar") {
+        alert("Opción inválida");
+        continue;
+    }
+
+    let recargoTotal = 0;
+
+    //Edad del asegurado
+    let edadAsegurado = parseInt(prompt("Ingrese la edad del asegurado:"));
+
+    if (edadAsegurado < 18) {
+        alert("El asegurado debe ser mayor de edad.");
+        continue;
+    }
+
+    //Recargo por edad del asegurado
+    if (edadAsegurado <= 24) {
+        recargoTotal += precioBase * 0.10;
+    } else if (edadAsegurado <= 49) {
+        recargoTotal += precioBase * 0.20;
+    } else {
+        recargoTotal += precioBase * 0.30;
+    }
+
+    // 🔹 Estado civil
+    let casado = prompt("¿El asegurado está casado? (si/no)").toLowerCase();
+
+    if (casado === "si") {
+        let edadConyuge = parseInt(prompt("Ingrese la edad del cónyuge:"));
+
+        if (edadConyuge >= 18 && edadConyuge <= 24) {
+            recargoTotal += precioBase * 0.10;
+        } else if (edadConyuge <= 49) {
+            recargoTotal += precioBase * 0.20;
+        } else {
+            recargoTotal += precioBase * 0.30;
+        }
+    }
+
+    // 🔹 Cantidad de hijos
+    let hijos = parseInt(prompt("Ingrese la cantidad de hijos:"));
+
+    if (hijos > 0) {
+        recargoTotal += precioBase * 0.20 * hijos;
+    }
+
+    // 🔹 NUEVO RECARGO: cantidad de propiedades
+    let propiedades = parseInt(prompt("Ingrese la cantidad de propiedades:"));
+
+    if (propiedades > 0) {
+        recargoTotal += precioBase * 0.35 * propiedades;
+    }
+
+    // 🔹 NUEVO RECARGO: salario del asegurado
+    let salario = parseFloat(prompt("Ingrese el salario del asegurado:"));
+
+    if (salario > 0) {
+        recargoTotal += salario * 0.05;
+    }
+
+    // 🔹 Total
+    let total = precioBase + recargoTotal;
+
+    alert(
+        "Cotización realizada con éxito\n\n" +
+        "Precio base: Q." + precioBase + "\n" +
+        "Recargos: Q." + recargoTotal.toFixed(2) + "\n" +
+        "Precio total: Q." + total.toFixed(2)
+    );
+}
+
+  </script>
+</body>
+</html>
